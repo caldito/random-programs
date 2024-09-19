@@ -33,7 +33,7 @@ def find(path, name, ftype):
         for f in files:
             file_path = join(path, f)
             print(file_path)
-            if isdir(f):
+            if isdir(file_path):
                 find(file_path, name, ftype)
     except NotADirectoryError:
         print("Error: The input should be a directory")
