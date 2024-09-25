@@ -5,7 +5,7 @@
 import argparse
 import sys
 from os import listdir
-from os.path import abspath, isdir, isfile, join
+from os.path import abspath, isdir, isfile, islink, join
 
 
 def parse_args():
@@ -32,7 +32,14 @@ def find(path, name, ftype):
         files = listdir(path)
         for f in files:
             file_path = join(path, f)
-            print(file_path)
+            if ftype == "f" and isfile(file_path):
+                print(file_path)
+            elif ftype == "d" and isdir(file_path):
+                print(file_path)
+            elif ftype == "l" and islink(file_path):
+                print(file_path)
+            elif ftype == "any":
+                print(filepath)
             if isdir(file_path):
                 find(file_path, name, ftype)
     except NotADirectoryError:
